@@ -1,0 +1,256 @@
+# ═══════════════════════════════════════════════════════════════
+#  BLWardrobe - Configuración Principal
+#  Plugin de diseñador de skins con Item Displays
+# ═══════════════════════════════════════════════════════════════
+
+# ─── CONFIGURACIÓN GENERAL ───
+settings:
+  # Idioma del plugin (es, en)
+  language: es
+
+  # Debug mode
+  debug: false
+
+  # Cooldown entre usos del armario (en segundos)
+  cooldown: 5
+
+  # Duración de la sesión del armario (en segundos, 0 = ilimitado)
+  session-timeout: 300
+
+  # Teletransportar al jugador al centro del armario al entrar
+  teleport-to-center: true
+
+  # Bloquear movimiento del jugador mientras está en el armario
+  freeze-player: true
+
+  # Ocultar jugador a otros mientras está en el armario
+  hide-player: true
+
+  # Radio máximo para salir del armario (bloques)
+  exit-radius: 3.0
+
+# ─── CONFIGURACIÓN DEL ARMARIO ───
+wardrobe:
+  # Tamaño de la zona del armario (radio en bloques)
+  radius: 2.0
+
+  # Altura del maniquí (bloques sobre el suelo)
+  mannequin-height: 1.5
+
+  # Distancia de la cámara al maniquí
+  camera-distance: 3.0
+
+  # Altura de la cámara relativa al maniquí
+  camera-height: 1.0
+
+  # Velocidad de rotación del maniquí (grados por tick)
+  rotation-speed: 2.0
+
+  # Mostrar partículas alrededor del maniquí
+  particles:
+    enabled: true
+    type: END_ROD
+    count: 5
+
+  # Sonidos
+  sounds:
+    open: BLOCK_CHEST_OPEN
+    close: BLOCK_CHEST_CLOSE
+    navigate: UI_BUTTON_CLICK
+    select: ENTITY_PLAYER_LEVELUP
+    error: ENTITY_VILLAGER_NO
+    apply: ITEM_ARMOR_EQUIP_LEATHER
+
+# ─── CONFIGURACIÓN DE SKINS ───
+# Sistema de integración con servicios de skins
+
+# ─── CONFIGURACION DE MODELOS POR PARTE ───
+# Define como se componen los nombres de los modelos para cada parte del cuerpo
+# Las variables entre { } se reemplazan por el ID de la categoria seleccionada
+# Al cambiar una categoria, se recalculan TODAS las partes dependientes
+
+part-models:
+  head: "head_{skin}_{face}"
+  body: "body_{skin}_{shirts}"
+  leftarm: "arm_left_{skin}_{shirts}"
+  rightarm: "arm_right_{skin}_{shirts}"
+  leftleg: "leg_left_{skin}_{pants}"
+  rightleg: "leg_right_{skin}_{pants}"
+
+skin-services:
+  # Servicio principal: MINESKIN | SKINSRESTORER | DIRECT
+  # MINESKIN: Usa la API de MineSkin para generar skins firmadas
+  # SKINSRESTORER: Usa el plugin SkinsRestorer instalado
+  # DIRECT: Intenta aplicar directamente (solo funciona en offline mode con mods)
+  primary-service: MINESKIN
+
+  # ─── MineSkin API ───
+  mineskin:
+    # Tu API Key de MineSkin (obtén una en account.mineskin.org)
+    # Dejar vacío para usar el plan gratuito (con límites)
+    api-key: ""
+
+    # Visibilidad de las skins generadas: PUBLIC | PRIVATE
+    visibility: PUBLIC
+
+    # Tiempo de espera máximo para generar una skin (segundos)
+    timeout: 30
+
+    # Reintentos si falla la generación
+    retries: 3
+
+    # Modelo por defecto: classic | slim
+    default-variant: classic
+
+  # ─── SkinsRestorer ───
+  skinsrestorer:
+    # Habilitar integración con SkinsRestorer
+    enabled: true
+
+    # Comando para aplicar la skin (placeholders: %player%, %url%)
+    apply-command: "skin url \"%url%\" %player%"
+
+  # ─── Imgur Upload (para hosting de imágenes) ───
+  imgur:
+    # Client ID de Imgur (obtén uno en api.imgur.com)
+    client-id: ""
+
+    # Habilitar subida automática a Imgur
+    enabled: false
+
+    # Álbum donde subir las skins (opcional)
+    album: ""
+
+# ─── CONFIGURACIÓN DEL RESOURCE PACK ───
+resourcepack:
+  # URL del resource pack (debe ser HTTPS y accesible públicamente)
+  # Deja en blanco para no enviar resource pack (asume que ya lo tienen)
+  url: ""
+
+  # SHA1 del resource pack (opcional pero recomendado)
+  sha1: ""
+
+  # Mensaje mostrado al jugador
+  prompt: "&a¡Descarga nuestro resource pack para ver las skins personalizadas!"
+
+  # Forzar descarga (kickea si no acepta)
+  required: true
+
+  # Auto-generar resource pack desde el plugin
+  auto-generate: true
+
+  # Puerto para hostear el resource pack internamente (0 = desactivado)
+  internal-port: 0
+
+# ─── CONFIGURACIÓN DE MENSAJES ───
+messages:
+  prefix: "&8[&6BLWardrobe&8] &r"
+
+  open-wardrobe: "&a¡Abriendo tu armario!"
+  close-wardrobe: "&cCerrando armario..."
+  no-permission: "&cNo tienes permiso para usar esta prenda."
+  no-permission-command: "&cNo tienes permiso para usar este comando."
+  skin-applied: "&a¡Skin aplicada correctamente!"
+  skin-saved: "&a¡Tu diseño ha sido guardado!"
+  skin-error: "&cError al aplicar la skin. Intenta de nuevo."
+  category-changed: "&eCategoría: &f%category%"
+  item-selected: "&eSeleccionado: &f%item%"
+  cooldown: "&cDebes esperar &f%time% &csegundos para usar el armario."
+  wardrobe-full: "&cEl armario está ocupado. Espera tu turno."
+  resource-pack-required: "&cNecesitas aceptar el resource pack para usar el armario."
+
+  # Mensajes del menú
+  menu-title: "&8&lARMARIO DE SKINS"
+  menu-category: "&eCategoría: &f%category%"
+  menu-item: "&f%item%"
+  menu-locked: "&c&lBLOQUEADO"
+  menu-selected: "&a&l✓ SELECCIONADO"
+
+  # Controles
+  controls-title: "&7&lControles:"
+  controls-wasd: "&7WASD &f- Navegar"
+  controls-space: "&7ESPACIO &f- Seleccionar"
+  controls-shift: "&7SHIFT &f- Atrás/Cerrar"
+  controls-q: "&7Q &f- Rotar maniquí"
+  controls-e: "&7E &f- Cambiar categoría"
+
+# ─── CONFIGURACIÓN DE ALMACENAMIENTO ───
+storage:
+  # Tipo: YAML | MYSQL
+  type: YAML
+
+  mysql:
+    host: localhost
+    port: 3306
+    database: blwardrobe
+    username: root
+    password: ""
+    table-prefix: blw_
+
+  # Guardar diseños de skins por jugador
+  save-designs: true
+
+  # Máximo de diseños guardados por jugador
+  max-saved-designs: 10
+
+# ─── CONFIGURACIÓN DE LOCACIONES ───
+# Puedes definir múltiples armarios en el mundo
+
+wardrobes:
+  spawn:
+    world: world
+    mannequin:
+      x: 0.0
+      y: 64.0
+      z: 0.0
+      orientation: SOUTH
+    camera:
+      x: 0.0
+      y: 65.0
+      z: 3.0
+      yaw: 180.0
+      pitch: 10.0
+    auto-rotate: false
+    enabled: true
+
+  # Ejemplo de otro armario:
+  # shop:
+  #   world: world
+  #   mannequin:
+  #     x: 100.0
+  #     y: 70.0
+  #     z: 200.0
+  #     orientation: EAST
+  #   camera:
+  #     x: 97.0
+  #     y: 71.0
+  #     z: 200.0
+  #     yaw: 90.0
+  #     pitch: 0.0
+  #   auto-rotate: false
+  #   enabled: true
+
+# ─── CONFIGURACIÓN DE PRECIOS (si usas economía) ───
+prices:
+  # Habilitar sistema de precios
+  enabled: false
+
+  # Moneda: VAULT | ITEM | POINTS
+  currency: VAULT
+
+  # Precio base por cambio de prenda
+  base-price: 0
+
+  # Precios por categoría (sobrescriben el base)
+  category-prices:
+    skin-tone: 0
+    face: 100
+    shirt: 150
+    pants: 150
+    shoes: 100
+    accessories: 200
+
+# ─── CONFIGURACIÓN DE ACTUALIZACIÓN AUTOMÁTICA ───
+update-checker:
+  enabled: true
+  notify-admins: true

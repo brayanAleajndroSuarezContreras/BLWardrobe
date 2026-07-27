@@ -1,0 +1,26 @@
+name: BLWardrobe
+version: 1.0.0
+main: com.blwardrobe.BLWardrobePlugin
+api-version: '1.21'
+author: TuNombre
+softdepend: [SkinsRestorer, LuckPerms, CraftEngine]
+commands:
+  blwardrobe:
+    description: Comando principal del diseñador de skins
+    aliases: [blw, wardrobe, armario]
+    usage: /blwardrobe [open|reload|resourcepack|help]
+permissions:
+  blwardrobe.use:
+    description: Permite usar el armario
+    default: true
+  blwardrobe.admin:
+    description: Permite recargar y generar resource packs
+    default: op
+  blwardrobe.skin.*:
+    description: Permite usar todas las skins
+    default: op
+    children:
+      blwardrobe.skin.default: true
+  blwardrobe.skin.default:
+    description: Permite usar skins por defecto
+    default: true
