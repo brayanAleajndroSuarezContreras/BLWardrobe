@@ -42,9 +42,19 @@ public class WardrobeMenu {
 
     public void show() {
         spawnHolograms();
+        initializeSkinState();
         recalculateParts();
         updateVisuals();
         sendControls();
+    }
+
+    // Siembra el SkinState con el item "default: true" de CADA categoria
+    // antes del primer render. Sin esto, el mannequin nace con placeholders
+    // "default" a ciegas en vez de los modelos realmente configurados.
+    private void initializeSkinState() {
+        for (Category cat : categories) {
+            updateSkinState(cat);
+        }
     }
 
     public void hide() {
@@ -54,17 +64,30 @@ public class WardrobeMenu {
         holograms.clear();
     }
 
+    private Location offsetBehind(Location base, double dx, double dy, double dz, float yaw) {
+        double rad = Math.toRadians(-yaw);
+        double x = base.getX() + (dx * Math.cos(rad) - dz * Math.sin(rad));
+        double z = base.getZ() + (dx * Math.sin(rad) + dz * Math.cos(rad));
+        return new Location(base.getWorld(), x, base.getY() + dy, z, yaw, 0f);
+    }
+
     private void spawnHolograms() {
-        double radius = 2.5;
+        float yaw = center.getYaw();
         int count = categories.size();
+
+        double spacing = 0.9;       // separacion horizontal entre iconos
+        double backDistance = 1.8;  // que tan atras del maniquin quedan
+        double height = 2.0;        // altura relativa al centro del maniquin
+
         for (int i = 0; i < count; i++) {
             final int index = i;
-            double angle = (2 * Math.PI * i) / count;
-            double x = center.getX() + Math.cos(angle) * radius;
-            double z = center.getZ() + Math.sin(angle) * radius;
-            double y = center.getY() + 2.5;
 
-            Location loc = new Location(center.getWorld(), x, y, z);
+            // dx centrado en 0: el primero (skin) queda mas a la izquierda,
+            // el ultimo (pants) mas a la derecha, vistos desde la camara.
+            double dx = (i - (count - 1) / 2.0) * spacing;
+
+            Location loc = offsetBehind(center, dx, height, -backDistance, yaw);
+
             ItemDisplay hd = loc.getWorld().spawn(loc, ItemDisplay.class, display -> {
                 display.setItemStack(createIcon(categories.get(index).getIcon()));
                 display.setTransformation(new Transformation(
@@ -183,8 +206,8 @@ public class WardrobeMenu {
 
     private void sendControls() {
         player.sendMessage(color("&7&lControles del Armario:"));
-        player.sendMessage(color("&7W/S &f- Cambiar categoria"));
-        player.sendMessage(color("&7A/D &f- Cambiar prenda"));
+        player.sendMessage(color("&7A/D &f- Cambiar categoria"));
+        player.sendMessage(color("&7W/S &f- Cambiar prenda"));
         player.sendMessage(color("&7F &f- Aplicar / Guardar"));
         player.sendMessage(color("&7SHIFT &f- Salir"));
     }

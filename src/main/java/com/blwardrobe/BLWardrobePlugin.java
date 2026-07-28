@@ -5,6 +5,7 @@ import com.blwardrobe.wardrobe.WardrobeManager;
 import com.blwardrobe.skin.SkinServiceManager;
 import com.blwardrobe.storage.StorageManager;
 import com.blwardrobe.resourcepack.RPManager;
+import com.blwardrobe.resourcepack.ResourcePackGenerator;
 import com.blwardrobe.listener.PlayerListener;
 import com.blwardrobe.command.BLWCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,6 +18,7 @@ public class BLWardrobePlugin extends JavaPlugin {
     private SkinServiceManager skinServiceManager;
     private StorageManager storageManager;
     private RPManager rpManager;
+    private ResourcePackGenerator resourcePackGenerator;
 
     @Override
     public void onEnable() {
@@ -30,10 +32,14 @@ public class BLWardrobePlugin extends JavaPlugin {
 
         this.storageManager = new StorageManager(this);
         this.rpManager = new RPManager(this);
+        this.resourcePackGenerator = new ResourcePackGenerator(this);
+        this.resourcePackGenerator.ensureBundledResourcesExtracted();
         this.skinServiceManager = new SkinServiceManager(this);
         this.wardrobeManager = new WardrobeManager(this);
 
-        getCommand("blwardrobe").setExecutor(new BLWCommand(this));
+        BLWCommand command = new BLWCommand(this);
+        getCommand("blwardrobe").setExecutor(command);
+        getCommand("blwardrobe").setTabCompleter(command);
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
 
         getLogger().info("BLWardrobe habilitado. " + configManager.getCategoryConfigs().size() + " categorias cargadas.");
@@ -51,4 +57,5 @@ public class BLWardrobePlugin extends JavaPlugin {
     public SkinServiceManager getSkinServiceManager() { return skinServiceManager; }
     public StorageManager getStorageManager() { return storageManager; }
     public RPManager getRpManager() { return rpManager; }
+    public ResourcePackGenerator getResourcePackGenerator() { return resourcePackGenerator; }
 }

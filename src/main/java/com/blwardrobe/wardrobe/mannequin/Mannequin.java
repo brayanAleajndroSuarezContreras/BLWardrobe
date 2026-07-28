@@ -25,10 +25,10 @@ public class Mannequin {
 
         head = spawnPart(offset(center, 0, 1.5, 0, yaw), "mannequin/head_default", new Vector3f(1f, 1f, 1f), yaw);
         body = spawnPart(offset(center, 0, 0.75, 0, yaw), "mannequin/body_default", new Vector3f(1f, 1.5f, 0.5f), yaw);
-        leftArm = spawnPart(offset(center, -0.6, 0.75, 0, yaw), "mannequin/arm_left_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
-        rightArm = spawnPart(offset(center, 0.6, 0.75, 0, yaw), "mannequin/arm_right_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
-        leftLeg = spawnPart(offset(center, -0.25, -0.25, 0, yaw), "mannequin/leg_left_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
-        rightLeg = spawnPart(offset(center, 0.25, -0.25, 0, yaw), "mannequin/leg_right_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
+        leftArm = spawnPart(offset(center, 0.6, 0.75, 0, yaw), "mannequin/arm_left_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
+        rightArm = spawnPart(offset(center, -0.6, 0.75, 0, yaw), "mannequin/arm_right_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
+        leftLeg = spawnPart(offset(center, 0.25, -0.25, 0, yaw), "mannequin/leg_left_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
+        rightLeg = spawnPart(offset(center, -0.25, -0.25, 0, yaw), "mannequin/leg_right_default", new Vector3f(0.5f, 1.5f, 0.5f), yaw);
     }
 
     private Location offset(Location base, double dx, double dy, double dz, float yaw) {
@@ -65,6 +65,14 @@ public class Mannequin {
         };
         if (target != null) {
             target.setItemStack(createModelItem(modelId));
+
+            Transformation current = target.getTransformation();
+            target.setTransformation(new Transformation(
+                    current.getTranslation(),
+                    current.getLeftRotation(),
+                    new Vector3f(1f, 1f, 1f),
+                    current.getRightRotation()
+            ));
         }
     }
 

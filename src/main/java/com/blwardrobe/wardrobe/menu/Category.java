@@ -28,6 +28,15 @@ public class Category {
                 }
             }
         }
+
+        // Arranca en el item marcado como "default: true" en vez de asumir
+        // que es el primero leido del yml (el orden de getKeys() no esta garantizado).
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).isDefault()) {
+                selectedIndex = i;
+                break;
+            }
+        }
     }
 
     public String getId() { return id; }

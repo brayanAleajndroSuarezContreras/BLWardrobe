@@ -17,4 +17,5 @@ public class SkinState {
     public Map<String, String> getAll() {
         return new HashMap<>(selections);
     }
+
 }

@@ -77,6 +77,48 @@ part-models:
   leftleg: "leg_left_{skin}_{pants}"
   rightleg: "leg_right_{skin}_{pants}"
 
+# ─── GENERACION DE CONFIG PARA CRAFTENGINE ───
+# Por cada parte de part-models, se genera un item por CADA combinacion
+# posible de las categorias que esa parte usa (producto cartesiano).
+# "parent" es el modelo base (siempre el mismo, no varia por combinacion).
+# "textures" define, para cada variable de textura del modelo, de que
+# categoria sale el valor: usa ${categoria} con el mismo nombre que
+# aparece entre {} en part-models de arriba.
+craftengine-generation:
+  namespace: blwardrobe
+  material: paper
+  parts:
+    head:
+      parent: "item/mannequin/head_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        face: "item/mannequin/face/${face}"
+    body:
+      parent: "item/mannequin/body_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        shirt: "item/mannequin/shirt/${shirts}"
+    leftarm:
+      parent: "item/mannequin/arm_left_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        shirt: "item/mannequin/shirt/${shirts}"
+    rightarm:
+      parent: "item/mannequin/arm_right_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        shirt: "item/mannequin/shirt/${shirts}"
+    leftleg:
+      parent: "item/mannequin/leg_left_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        pants: "item/mannequin/pants/${pants}"
+    rightleg:
+      parent: "item/mannequin/leg_right_default"
+      textures:
+        skin: "item/mannequin/skin/${skin}"
+        pants: "item/mannequin/pants/${pants}"
+
 skin-services:
   # Servicio principal: MINESKIN | SKINSRESTORER | DIRECT
   # MINESKIN: Usa la API de MineSkin para generar skins firmadas
@@ -206,7 +248,7 @@ wardrobes:
       orientation: SOUTH
     camera:
       x: 0.0
-      y: 65.0
+      y: 66.0
       z: 3.0
       yaw: 180.0
       pitch: 10.0

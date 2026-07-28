@@ -46,11 +46,11 @@ public class PlayerListener implements Listener {
         double strafe = dx * Math.cos(yaw) + dz * Math.sin(yaw);
 
         if (Math.abs(forward) > Math.abs(strafe)) {
-            if (forward > 0.01) session.getMenu().navigateUp();
-            else if (forward < -0.01) session.getMenu().navigateDown();
+            if (forward > 0.01) session.getMenu().navigateRight();   // W = siguiente prenda
+            else if (forward < -0.01) session.getMenu().navigateLeft(); // S = prenda anterior
         } else {
-            if (strafe > 0.01) session.getMenu().navigateLeft();
-            else if (strafe < -0.01) session.getMenu().navigateRight();
+            if (strafe > 0.01) session.getMenu().navigateUp();       // A = categoria izquierda
+            else if (strafe < -0.01) session.getMenu().navigateDown(); // D = categoria derecha
         }
     }
 

@@ -18,7 +18,7 @@ public class ConfigManager {
     public void loadAll() {
         categoryConfigs.clear();
         File baseDir = plugin.getDataFolder();
-        String[] folders = {"skin", "face", "shirts", "pants", "shoes", "accessories"};
+        String[] folders = {"skin", "face", "shirts", "pants"};
 
         for (String folder : folders) {
             File dir = new File(baseDir, folder);
@@ -50,13 +50,14 @@ public class ConfigManager {
         try {
             defaultFile.createNewFile();
             YamlConfiguration yaml = new YamlConfiguration();
+            String itemKey = folder + "_default";
             yaml.set("name", "&e" + capitalize(folder));
             yaml.set("slot", getDefaultSlot(folder));
             yaml.set("icon", getDefaultIcon(folder));
-            yaml.set("items.default.name", "&fDefault " + capitalize(folder));
-            yaml.set("items.default.permission", "blwardrobe.skin." + folder + ".default");
-            yaml.set("items.default.default", true);
-            yaml.set("items.default.model", folder + "_default");
+            yaml.set("items." + itemKey + ".name", "&fDefault " + capitalize(folder));
+            yaml.set("items." + itemKey + ".permission", "blwardrobe.skin." + folder + ".default");
+            yaml.set("items." + itemKey + ".default", true);
+            yaml.set("items." + itemKey + ".model", folder + "_default");
             yaml.save(defaultFile);
         } catch (IOException e) {
             plugin.getLogger().warning("No se pudo crear " + defaultFile.getName());
@@ -73,8 +74,6 @@ public class ConfigManager {
             case "face" -> 1;
             case "shirts" -> 2;
             case "pants" -> 3;
-            case "shoes" -> 4;
-            case "accessories" -> 5;
             default -> 0;
         };
     }
@@ -84,8 +83,6 @@ public class ConfigManager {
             case "skin", "face" -> "PLAYER_HEAD";
             case "shirts" -> "LEATHER_CHESTPLATE";
             case "pants" -> "LEATHER_LEGGINGS";
-            case "shoes" -> "LEATHER_BOOTS";
-            case "accessories" -> "GOLDEN_HELMET";
             default -> "PAPER";
         };
     }
