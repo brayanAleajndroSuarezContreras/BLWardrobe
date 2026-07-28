@@ -2,9 +2,9 @@
 	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"textures": {
+		"particle": "blwardrobe:item/mannequin/skin/skin_default",
 		"skin": "blwardrobe:item/mannequin/skin/skin_default",
-		"shirts": "blwardrobe:item/mannequin/shirt/shirts_default",
-		"particle": "blwardrobe:item/mannequin/skin/skin_default"
+		"shirts": "blwardrobe:item/mannequin/shirt/shirt_default"
 	},
 	"elements": [
 		{
@@ -52,5 +52,5 @@
 			"translation": [0, -18, 0],
 			"scale": [1.2, 1.2, 1.2]
 		}
-	}	
+	}
 }
