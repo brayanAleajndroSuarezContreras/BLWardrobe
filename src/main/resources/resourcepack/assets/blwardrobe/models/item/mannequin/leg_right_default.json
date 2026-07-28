@@ -1,0 +1,24 @@
+{
+  "credit": "BLWardrobe",
+  "textures": {
+    "skin": "blwardrobe:item/mannequin/skin/tone_default",
+    "pants": "blwardrobe:item/mannequin/pants/pants_none"
+  },
+  "elements": [
+    {
+      "from": [-0.1, 0, -2],
+      "to": [3.9, 12, 2],
+      "faces": {
+        "north": {"uv": [1, 5, 2, 8], "texture": "#pants"},
+        "east":  {"uv": [0, 5, 1, 8], "texture": "#skin"},
+        "south": {"uv": [3, 5, 4, 8], "texture": "#skin"},
+        "west":  {"uv": [2, 5, 3, 8], "texture": "#skin"},
+        "up":    {"uv": [1, 4, 2, 5], "texture": "#skin"},
+        "down":  {"uv": [2, 4, 3, 5], "texture": "#skin"}
+      }
+    }
+  ],
+  "display": {
+    "head": {"translation": [-1, -12, 0], "scale": [1.2, 1.2, 1.2]}
+  }
+}
