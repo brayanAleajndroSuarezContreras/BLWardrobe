@@ -1,0 +1,14 @@
+name: '&eShirt'
+slot: 2
+icon: LEATHER_CHESTPLATE
+items:
+  shirt_default:
+    name: '&fDefault Shirt'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_default
+  shirt_legend_boda:
+    name: '&fShirt Legend Boda'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_legend_boda

@@ -1,13 +1,11 @@
 package com.blwardrobe.resourcepack;
 
 import com.blwardrobe.BLWardrobePlugin;
+import com.blwardrobe.util.JarResourceExtractor;
 
-import java.io.*;
-import java.net.URISyntaxException;
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.*;
-import java.util.Enumeration;
-import java.util.jar.JarEntry;
-import java.util.jar.JarFile;
 import java.util.stream.Stream;
 
 public class ResourcePackGenerator {
@@ -35,43 +33,10 @@ public class ResourcePackGenerator {
      * Llamar en onEnable().
      */
     public void ensureBundledResourcesExtracted() {
-        bundledDir.mkdirs();
-
-        try (JarFile jar = new JarFile(getJarFile())) {
-            Enumeration<JarEntry> entries = jar.entries();
-            int extracted = 0;
-            while (entries.hasMoreElements()) {
-                JarEntry entry = entries.nextElement();
-                String name = entry.getName();
-                if (entry.isDirectory() || !name.startsWith(BUNDLED_PREFIX)) continue;
-
-                String relative = name.substring(BUNDLED_PREFIX.length());
-                if (relative.isEmpty()) continue;
-
-                File outFile = new File(bundledDir, relative);
-                if (outFile.exists()) continue; // no pisar cambios locales
-
-                outFile.getParentFile().mkdirs();
-                try (InputStream in = jar.getInputStream(entry);
-                     OutputStream out = new FileOutputStream(outFile)) {
-                    in.transferTo(out);
-                }
-                extracted++;
-            }
-            if (extracted > 0) {
-                plugin.getLogger().info("Se extrajeron " + extracted + " archivos de resourcepack a " + bundledDir.getAbsolutePath());
-            }
-        } catch (IOException | URISyntaxException e) {
-            plugin.getLogger().warning("No se pudieron extraer los assets embebidos: " + e.getMessage());
+        int extracted = JarResourceExtractor.extract(plugin, BUNDLED_PREFIX, bundledDir);
+        if (extracted > 0) {
+            plugin.getLogger().info("Se extrajeron " + extracted + " archivos de resourcepack a " + bundledDir.getAbsolutePath());
         }
-    }
-
-    private File getJarFile() throws URISyntaxException {
-        return new File(plugin.getClass()
-                .getProtectionDomain()
-                .getCodeSource()
-                .getLocation()
-                .toURI());
     }
 
     /**

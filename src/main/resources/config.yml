@@ -61,63 +61,113 @@ wardrobe:
     error: ENTITY_VILLAGER_NO
     apply: ITEM_ARMOR_EQUIP_LEATHER
 
-# ─── CONFIGURACIÓN DE SKINS ───
-# Sistema de integración con servicios de skins
-
-# ─── CONFIGURACION DE MODELOS POR PARTE ───
-# Define como se componen los nombres de los modelos para cada parte del cuerpo
-# Las variables entre { } se reemplazan por el ID de la categoria seleccionada
-# Al cambiar una categoria, se recalculan TODAS las partes dependientes
-
-part-models:
-  head: "head_{skin}_{face}"
-  body: "body_{skin}_{shirts}"
-  leftarm: "arm_left_{skin}_{shirts}"
-  rightarm: "arm_right_{skin}_{shirts}"
-  leftleg: "leg_left_{skin}_{pants}"
-  rightleg: "leg_right_{skin}_{pants}"
-
-# ─── GENERACION DE CONFIG PARA CRAFTENGINE ───
-# Por cada parte de part-models, se genera un item por CADA combinacion
-# posible de las categorias que esa parte usa (producto cartesiano).
-# "parent" es el modelo base (siempre el mismo, no varia por combinacion).
-# "textures" define, para cada variable de textura del modelo, de que
-# categoria sale el valor: usa ${categoria} con el mismo nombre que
-# aparece entre {} en part-models de arriba.
-craftengine-generation:
+# ─── CAPAS DEL MANIQUI ───
+# Cada parte del cuerpo se arma superponiendo varios ItemDisplay (capas),
+# uno por categoria. NO hay combinacion entre categorias (skin x shirt x ...):
+# cada capa es independiente, asi que agregar mas opciones a una categoria
+# NO multiplica la cantidad de modelos que hay que generar/texturizar.
+#
+# El orden de la lista define el orden de renderizado (la primera va al
+# fondo, ej. skin; las siguientes se dibujan encima, ej. shirt/face/pants).
+#
+# Por capa:
+#   category    -> categoria del armario que controla esta capa (skin/face/shirt/hair/pants)
+#   id          -> plantilla del id del modelo para esa capa. {categoria} se
+#                  reemplaza por el id del item seleccionado.
+#   parent      -> modelo base (mismo mesh) sobre el que CraftEngine genera esta capa
+#   texture-var -> nombre de la variable de textura en el modelo (si se omite, usa "category")
+#   texture     -> plantilla de la ruta de textura. ${categoria} se reemplaza
+#                  por el id del item seleccionado.
+mannequin-layers:
   namespace: blwardrobe
   material: paper
   parts:
     head:
-      parent: "item/mannequin/head_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        face: "item/mannequin/face/${face}"
+      - category: skin
+        id: "skin_head_{skin}"
+        parent: "item/mannequin/head_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: face
+        id: "face_head_{face}"
+        parent: "item/mannequin/head_face_default"
+        texture-var: face
+        texture: "item/mannequin/face/${face}"
+      - category: hair
+        id: "hair_head_{hair}"
+        parent: "item/mannequin/head_hair_default"
+        texture-var: hair
+        texture: "item/mannequin/hair/${hair}"
     body:
-      parent: "item/mannequin/body_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        shirt: "item/mannequin/shirt/${shirts}"
+      - category: skin
+        id: "skin_body_{skin}"
+        parent: "item/mannequin/body_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: shirt
+        id: "shirt_body_{shirt}"
+        parent: "item/mannequin/body_shirt_default"
+        texture-var: shirt
+        texture: "item/mannequin/shirt/${shirt}"
+      - category: hair
+        id: "hair_body_{hair}"
+        parent: "item/mannequin/body_hair_default"
+        texture-var: hair
+        texture: "item/mannequin/hair/${hair}"
     leftarm:
-      parent: "item/mannequin/arm_left_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        shirt: "item/mannequin/shirt/${shirts}"
+      - category: skin
+        id: "skin_arm_left_{skin}"
+        parent: "item/mannequin/arm_left_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: shirt
+        id: "shirt_arm_left_{shirt}"
+        parent: "item/mannequin/arm_left_shirt_default"
+        texture-var: shirt
+        texture: "item/mannequin/shirt/${shirt}"
+      - category: hair
+        id: "hair_arm_left_{hair}"
+        parent: "item/mannequin/arm_left_hair_default"
+        texture-var: hair
+        texture: "item/mannequin/hair/${hair}"
     rightarm:
-      parent: "item/mannequin/arm_right_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        shirt: "item/mannequin/shirt/${shirts}"
+      - category: skin
+        id: "skin_arm_right_{skin}"
+        parent: "item/mannequin/arm_right_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: shirt
+        id: "shirt_arm_right_{shirt}"
+        parent: "item/mannequin/arm_right_shirt_default"
+        texture-var: shirt
+        texture: "item/mannequin/shirt/${shirt}"
+      - category: hair
+        id: "hair_arm_right_{hair}"
+        parent: "item/mannequin/arm_right_hair_default"
+        texture-var: hair
+        texture: "item/mannequin/hair/${hair}"
     leftleg:
-      parent: "item/mannequin/leg_left_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        pants: "item/mannequin/pants/${pants}"
+      - category: skin
+        id: "skin_leg_left_{skin}"
+        parent: "item/mannequin/leg_left_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: pants
+        id: "pants_leg_left_{pants}"
+        parent: "item/mannequin/leg_left_pants_default"
+        texture-var: pants
+        texture: "item/mannequin/pants/${pants}"
     rightleg:
-      parent: "item/mannequin/leg_right_default"
-      textures:
-        skin: "item/mannequin/skin/${skin}"
-        pants: "item/mannequin/pants/${pants}"
+      - category: skin
+        id: "skin_leg_right_{skin}"
+        parent: "item/mannequin/leg_right_default"
+        texture-var: skin
+        texture: "item/mannequin/skin/${skin}"
+      - category: pants
+        id: "pants_leg_right_{pants}"
+        parent: "item/mannequin/leg_right_pants_default"
+        texture-var: pants
+        texture: "item/mannequin/pants/${pants}"
 
 skin-services:
   # Servicio principal: MINESKIN | SKINSRESTORER | DIRECT
@@ -248,8 +298,8 @@ wardrobes:
       orientation: SOUTH
     camera:
       x: 0.0
-      y: 66.0
-      z: 3.0
+      y: 65.0
+      z: 2.0
       yaw: 180.0
       pitch: 10.0
     auto-rotate: false

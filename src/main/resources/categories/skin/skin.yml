@@ -1,0 +1,14 @@
+name: '&eSkin'
+slot: 0
+icon: PLAYER_HEAD
+items:
+  skin_default:
+    name: '&fDefault Skin'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_default
+  skin_legend_boda:
+    name: '&fDefault Skin'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_legend_boda

@@ -1,51 +1,65 @@
 package com.blwardrobe.wardrobe.skin;
 
 import com.blwardrobe.BLWardrobePlugin;
-import org.bukkit.configuration.ConfigurationSection;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * Resuelve, para la seleccion actual del jugador (SkinState), el modelo que
+ * le corresponde a CADA CAPA de cada parte del maniquin, segun
+ * config.yml -> mannequin-layers.parts.
+ *
+ * A diferencia del esquema anterior (una sola plantilla combinando varias
+ * categorias por parte), aca cada capa depende de UNA sola categoria, asi
+ * que no hay combinacion entre ellas.
+ */
 public class PartModelResolver {
     private final BLWardrobePlugin plugin;
-    private final Map<String, String> partTemplates = new HashMap<>();
+
+    // parte -> lista de capas [{category, idTemplate}], en orden de renderizado
+    private final Map<String, List<Layer>> partLayers = new LinkedHashMap<>();
+
+    public record Layer(String category, String idTemplate) {}
 
     public PartModelResolver(BLWardrobePlugin plugin) {
         this.plugin = plugin;
-        loadTemplates();
+        loadLayers();
     }
 
-    private void loadTemplates() {
-        var section = plugin.getConfig().getConfigurationSection("part-models");
-        if (section == null) {
-            partTemplates.put("head", "head_{skin}_{face}");
-            partTemplates.put("body", "body_{skin}_{shirts}");
-            partTemplates.put("leftarm", "arm_left_{skin}_{shirts}");
-            partTemplates.put("rightarm", "arm_right_{skin}_{shirts}");
-            partTemplates.put("leftleg", "leg_left_{skin}_{pants}");
-            partTemplates.put("rightleg", "leg_right_{skin}_{pants}");
-            return;
-        }
-        for (String part : section.getKeys(false)) {
-            partTemplates.put(part, section.getString(part));
+    private void loadLayers() {
+        var partsSection = plugin.getConfig().getConfigurationSection("mannequin-layers.parts");
+        if (partsSection == null) return;
+
+        for (String part : partsSection.getKeys(false)) {
+            List<Map<?, ?>> layerConfigs = partsSection.getMapList(part);
+            List<Layer> layers = new java.util.ArrayList<>();
+            for (Map<?, ?> raw : layerConfigs) {
+                Object category = raw.get("category");
+                Object id = raw.get("id");
+                if (category == null || id == null) continue;
+                layers.add(new Layer(String.valueOf(category), String.valueOf(id)));
+            }
+            partLayers.put(part, layers);
         }
     }
 
-    public String resolve(String part, SkinState state) {
-        String template = partTemplates.getOrDefault(part, part);
-        String result = template;
-        for (Map.Entry<String, String> entry : state.getAll().entrySet()) {
-            result = result.replace("{" + entry.getKey() + "}", entry.getValue());
+    /**
+     * @return parte -> (categoria -> modelId resuelto para la seleccion actual)
+     */
+    public Map<String, Map<String, String>> resolveAll(SkinState state) {
+        Map<String, Map<String, String>> result = new LinkedHashMap<>();
+        for (var entry : partLayers.entrySet()) {
+            String part = entry.getKey();
+            Map<String, String> resolvedLayers = new LinkedHashMap<>();
+            for (Layer layer : entry.getValue()) {
+                String selection = state.getSelection(layer.category());
+                String modelId = layer.idTemplate().replace("{" + layer.category() + "}", selection);
+                resolvedLayers.put(layer.category(), modelId);
+            }
+            result.put(part, resolvedLayers);
         }
-        result = result.replaceAll("\\{[^}]+\\}", "default");
         return result;
-    }
-
-    public Map<String, String> resolveAll(SkinState state) {
-        Map<String, String> models = new HashMap<>();
-        for (String part : partTemplates.keySet()) {
-            models.put(part, resolve(part, state));
-        }
-        return models;
     }
 }

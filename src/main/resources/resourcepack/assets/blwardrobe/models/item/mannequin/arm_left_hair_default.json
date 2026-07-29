@@ -1,0 +1,22 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "blwardrobe:item/mannequin/hair/hair_default",
+		"particle": "blwardrobe:item/mannequin/hair/hair_default"
+	},
+	"elements": [
+		{
+			"from": [5.75, -0.25, 5.75],
+			"to": [10.25, 12.25, 10.25],
+			"faces": {
+				"north": {"uv": [9, 13, 10, 16], "texture": "#0"},
+				"east": {"uv": [8, 13, 9, 16], "texture": "#0"},
+				"south": {"uv": [11, 13, 12, 16], "texture": "#0"},
+				"west": {"uv": [10, 13, 11, 16], "texture": "#0"},
+				"up": {"uv": [9, 12, 10, 13], "texture": "#0"},
+				"down": {"uv": [10, 12, 11, 13], "texture": "#0"}
+			}
+		}
+	]
+}

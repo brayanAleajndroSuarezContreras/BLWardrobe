@@ -64,6 +64,8 @@ public class WardrobeMenu {
         holograms.clear();
     }
 
+    // Rota (dx, dz) segun el yaw del maniquin, igual que Mannequin.offset().
+    // dx > 0 = derecha del jugador mirando al maniquin, dz < 0 = detras del maniquin.
     private Location offsetBehind(Location base, double dx, double dy, double dz, float yaw) {
         double rad = Math.toRadians(-yaw);
         double x = base.getX() + (dx * Math.cos(rad) - dz * Math.sin(rad));
@@ -138,9 +140,12 @@ public class WardrobeMenu {
 
     private void recalculateParts() {
         var resolver = new com.blwardrobe.wardrobe.skin.PartModelResolver(plugin);
-        var models = resolver.resolveAll(session.getSkinState());
-        for (var entry : models.entrySet()) {
-            session.getMannequin().setPart(entry.getKey(), entry.getValue());
+        var perPart = resolver.resolveAll(session.getSkinState());
+        for (var partEntry : perPart.entrySet()) {
+            String part = partEntry.getKey();
+            for (var layerEntry : partEntry.getValue().entrySet()) {
+                session.getMannequin().setLayer(part, layerEntry.getKey(), layerEntry.getValue());
+            }
         }
     }
 

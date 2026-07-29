@@ -1,0 +1,14 @@
+name: '&ePants'
+slot: 3
+icon: LEATHER_LEGGINGS
+items:
+  pants_default:
+    name: '&fDefault Pants'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_default
+  pants_legend_boda:
+    name: '&fPants Legend Boda'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_legend_boda

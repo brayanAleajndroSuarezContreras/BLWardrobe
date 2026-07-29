@@ -1,6 +1,7 @@
 package com.blwardrobe.config;
 
 import com.blwardrobe.BLWardrobePlugin;
+import com.blwardrobe.util.JarResourceExtractor;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -18,16 +19,25 @@ public class ConfigManager {
     public void loadAll() {
         categoryConfigs.clear();
         File baseDir = plugin.getDataFolder();
-        String[] folders = {"skin", "face", "shirts", "pants"};
+        // Categorias activas para pruebas.
+        // Para reactivar mas adelante: {"skin", "face", "shirt", "hair", "pants", "shoes", "accessories"}
+        String[] folders = {"skin", "face", "shirt", "hair", "pants"};
 
         for (String folder : folders) {
             File dir = new File(baseDir, folder);
-            if (!dir.exists()) {
-                dir.mkdirs();
-                createDefaultFile(dir, folder);
-            }
+            dir.mkdirs();
+
+            // Copia (sin pisar ediciones locales) los .yml que vengan bundleados
+            // en src/main/resources/categories/<folder>/ dentro del jar.
+            JarResourceExtractor.extract(plugin, "categories/" + folder + "/", dir);
 
             File[] files = dir.listFiles((d, name) -> name.endsWith(".yml"));
+            if (files == null || files.length == 0) {
+                // Red de seguridad: si no se bundleo nada para esta categoria,
+                // se genera un archivo minimo con un item default.
+                createDefaultFile(dir, folder);
+                files = dir.listFiles((d, name) -> name.endsWith(".yml"));
+            }
             if (files == null) continue;
 
             for (File file : files) {
@@ -72,8 +82,11 @@ public class ConfigManager {
         return switch (folder) {
             case "skin" -> 0;
             case "face" -> 1;
-            case "shirts" -> 2;
-            case "pants" -> 3;
+            case "shirt" -> 2;
+            case "hair" -> 3;
+            case "pants" -> 4;
+            case "shoes" -> 5;
+            case "accessories" -> 6;
             default -> 0;
         };
     }
@@ -81,8 +94,11 @@ public class ConfigManager {
     private String getDefaultIcon(String folder) {
         return switch (folder) {
             case "skin", "face" -> "PLAYER_HEAD";
-            case "shirts" -> "LEATHER_CHESTPLATE";
+            case "shirt" -> "LEATHER_CHESTPLATE";
+            case "hair" -> "SHEARS";
             case "pants" -> "LEATHER_LEGGINGS";
+            case "shoes" -> "LEATHER_BOOTS";
+            case "accessories" -> "GOLDEN_HELMET";
             default -> "PAPER";
         };
     }

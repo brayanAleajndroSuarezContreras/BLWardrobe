@@ -1,0 +1,14 @@
+name: '&eFace'
+slot: 1
+icon: PLAYER_HEAD
+items:
+  face_default:
+    name: '&fDefault Face'
+    permission: blwardrobe.skin.face.default
+    default: true
+    model: face_default
+  face_legend_boda:
+    name: '&fLegend Boda'
+    permission: blwardrobe.skin.face.default
+    default: true
+    model: face_legend_boda
