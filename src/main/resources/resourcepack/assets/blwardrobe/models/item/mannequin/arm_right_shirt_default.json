@@ -1,9 +1,8 @@
 {
 	"format_version": "1.21.11",
-	"credit": "Made with Blockbench",
+	"credit": "BLStudio",
 	"textures": {
-		"0": "blwardrobe:item/mannequin/shirt/shirt_default",
-		"particle": "blwardrobe:item/mannequin/shirt/shirt_default"
+		"shirt": "blwardrobe:item/mannequin/shirt/shirt_default"
 	},
 	"elements": [
 		{
@@ -11,12 +10,12 @@
 			"to": [10, 12, 10],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 6]},
 			"faces": {
-				"north": {"uv": [11, 5, 12, 8], "texture": "#0"},
-				"east": {"uv": [10, 5, 11, 8], "texture": "#0"},
-				"south": {"uv": [13, 5, 14, 8], "texture": "#0"},
-				"west": {"uv": [12, 5, 13, 8], "texture": "#0"},
-				"up": {"uv": [11, 4, 12, 5], "texture": "#0"},
-				"down": {"uv": [12, 4, 13, 5], "texture": "#0"}
+				"north": {"uv": [11, 5, 12, 8], "texture": "#shirt"},
+				"east": {"uv": [10, 5, 11, 8], "texture": "#shirt"},
+				"south": {"uv": [13, 5, 14, 8], "texture": "#shirt"},
+				"west": {"uv": [12, 5, 13, 8], "texture": "#shirt"},
+				"up": {"uv": [11, 4, 12, 5], "texture": "#shirt"},
+				"down": {"uv": [12, 4, 13, 5], "texture": "#shirt"}
 			}
 		},
 		{
@@ -24,12 +23,12 @@
 			"to": [10.24, 12.24, 10.24],
 			"rotation": {"angle": 0, "axis": "y", "origin": [6, 0, 6]},
 			"faces": {
-				"north": {"uv": [11, 9, 12, 12], "texture": "#0"},
-				"east": {"uv": [10, 9, 11, 12], "texture": "#0"},
-				"south": {"uv": [13, 9, 14, 12], "texture": "#0"},
-				"west": {"uv": [12, 9, 13, 12], "texture": "#0"},
-				"up": {"uv": [11, 8, 12, 9], "texture": "#0"},
-				"down": {"uv": [12, 8, 13, 9], "texture": "#0"}
+				"north": {"uv": [11, 9, 12, 12], "texture": "#shirt"},
+				"east": {"uv": [10, 9, 11, 12], "texture": "#shirt"},
+				"south": {"uv": [13, 9, 14, 12], "texture": "#shirt"},
+				"west": {"uv": [12, 9, 13, 12], "texture": "#shirt"},
+				"up": {"uv": [11, 8, 12, 9], "texture": "#shirt"},
+				"down": {"uv": [12, 8, 13, 9], "texture": "#shirt"}
 			}
 		}
 	]

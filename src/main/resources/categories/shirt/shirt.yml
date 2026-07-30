@@ -3,12 +3,52 @@ slot: 2
 icon: LEATHER_CHESTPLATE
 items:
   shirt_default:
-    name: '&fDefault Shirt'
+    name: '&fShirt Legend'
     permission: blwardrobe.skin.shirt.default
     default: true
     model: shirt_default
-  shirt_legend_boda:
-    name: '&fShirt Legend Boda'
+  shirt_alex:
+    name: '&fShirt Alex'
     permission: blwardrobe.skin.shirt.default
     default: true
-    model: shirt_legend_boda
+    model: shirt_alex
+  shirt_ari:
+    name: '&fShirt Ari'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_ari
+  shirt_efe:
+    name: '&fShirt Efe'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_efe
+  shirt_kai:
+    name: '&fShirt Kai'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_kai
+  shirt_makena:
+    name: '&fShirt Makena'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_makena
+  shirt_noor:
+    name: '&fShirt Noor'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_noor
+  shirt_steve:
+    name: '&fShirt Steve'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_steve
+  shirt_sunny:
+    name: '&fShirt Sunny'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_sunny
+  shirt_zuri:
+    name: '&fShirt Zuri'
+    permission: blwardrobe.skin.shirt.default
+    default: true
+    model: shirt_zuri

@@ -3,12 +3,52 @@ slot: 3
 icon: LEATHER_LEGGINGS
 items:
   pants_default:
-    name: '&fDefault Pants'
+    name: '&fPants Legend'
     permission: blwardrobe.skin.pants.default
     default: true
     model: pants_default
-  pants_legend_boda:
-    name: '&fPants Legend Boda'
+  pants_alex:
+    name: '&fPants Alex'
     permission: blwardrobe.skin.pants.default
     default: true
-    model: pants_legend_boda
+    model: pants_alex
+  pants_ari:
+    name: '&fPants Ari'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_ari
+  pants_efe:
+    name: '&fPants Efe'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_efe
+  pants_kai:
+    name: '&fPants Kai'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_kai
+  pants_makena:
+    name: '&fPants Makena'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_makena
+  pants_noor:
+    name: '&fPants Noor'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_noor
+  pants_steve:
+    name: '&fPants Steve'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_steve
+  pants_sunny:
+    name: '&fPants Sunny'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_sunny
+  pants_zuri:
+    name: '&fPants Zuri'
+    permission: blwardrobe.skin.pants.default
+    default: true
+    model: pants_zuri

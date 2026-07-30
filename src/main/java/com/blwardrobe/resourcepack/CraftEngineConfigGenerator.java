@@ -77,19 +77,27 @@ public class CraftEngineConfigGenerator {
                 for (String itemId : items.getKeys(false)) {
                     String suffix = idTemplate.replace("{" + category + "}", itemId);
                     String fullId = namespace + ":" + suffix;
-                    String base = "items." + fullId;
 
-                    yaml.set(base + ".material", material);
-                    yaml.set(base + ".model.type", "minecraft:model");
-                    // ${__ID__} es una variable propia de CraftEngine (se resuelve sola),
-                    // no la interpolamos aca.
-                    yaml.set(base + ".model.path", namespace + ":item/mannequin/${__ID__}");
-                    if (parent != null) {
-                        yaml.set(base + ".model.generation.parent", namespace + ":" + parent);
+                    // 1. Accedemos directamente a la sección 'items'
+                    ConfigurationSection itemsSection = yaml.getConfigurationSection("items");
+                    if (itemsSection == null) {
+                        itemsSection = yaml.createSection("items");
                     }
+
+                    // 2. Creamos una subsección explícita usando fullId como clave completa (evita la división por '.')
+                    ConfigurationSection itemSection = itemsSection.createSection(fullId);
+
+                    itemSection.set("material", material);
+                    itemSection.set("model.type", "minecraft:model");
+                    itemSection.set("model.path", namespace + ":item/mannequin/${__ID__}");
+
+                    if (parent != null) {
+                        itemSection.set("model.generation.parent", namespace + ":" + parent);
+                    }
+
                     if (textureTemplate != null) {
                         String resolvedTexture = textureTemplate.replace("${" + category + "}", itemId);
-                        yaml.set(base + ".model.generation.textures." + textureVar, namespace + ":" + resolvedTexture);
+                        itemSection.set("model.generation.textures." + textureVar, namespace + ":" + resolvedTexture);
                     }
 
                     totalItems++;

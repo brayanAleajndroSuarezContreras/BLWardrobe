@@ -293,12 +293,12 @@ wardrobes:
     world: world
     mannequin:
       x: 0.0
-      y: 64.0
+      y: 64.0 # real 63, config 64, debes añadir +1
       z: 0.0
       orientation: SOUTH
     camera:
       x: 0.0
-      y: 65.0
+      y: 64.0
       z: 2.0
       yaw: 180.0
       pitch: 10.0

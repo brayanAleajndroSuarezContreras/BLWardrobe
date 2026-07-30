@@ -1,54 +1,54 @@
-name: '&eFace'
-slot: 1
+name: '&eHair'
+slot: 3
 icon: PLAYER_HEAD
 items:
-  face_default:
-    name: '&fFace Legend'
+  hair_default:
+    name: '&fHair Legend'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_default
-  face_alex:
-    name: '&fFace Alex'
+    model: hair_default
+  hair_alex:
+    name: '&fHair Alex'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_alex
-  face_ari:
-    name: '&fFace Ari'
+    model: hair_alex
+  hair_ari:
+    name: '&fHair Ari'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_ari
-  face_efe:
-    name: '&fFace Efe'
+    model: hair_ari
+  hair_efe:
+    name: '&fHair Efe'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_efe
-  face_kai:
-    name: '&fFace Kai'
+    model: hair_efe
+  hair_kai:
+    name: '&fHair Kai'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_kai
-  face_makena:
-    name: '&fFace Makena'
+    model: hair_kai
+  hair_makena:
+    name: '&fHair Makena'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_makena
-  face_noor:
-    name: '&fFace Noor'
+    model: hair_makena
+  hair_noor:
+    name: '&fHair Noor'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_noor
-  face_steve:
-    name: '&fFace Steve'
+    model: hair_noor
+  hair_steve:
+    name: '&fHair Steve'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_steve
-  face_sunny:
-    name: '&fFace Sunny'
+    model: hair_steve
+  hair_sunny:
+    name: '&fHair Sunny'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_sunny
-  face_zuri:
-    name: '&fFace Zuri'
+    model: hair_sunny
+  hair_zuri:
+    name: '&fHair Zuri'
     permission: blwardrobe.skin.face.default
     default: true
-    model: face_zuri
+    model: hair_zuri

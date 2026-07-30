@@ -21,12 +21,12 @@ public class Mannequin {
     // Geometria de cada parte del cuerpo (igual que antes). Todas las capas
     // de una misma parte comparten esta posicion/escala base.
     private static final Map<String, PartGeometry> PART_GEOMETRY = Map.of(
-            "head", new PartGeometry(0, 1.5, 0, new Vector3f(1f, 1f, 1f)),
-            "body", new PartGeometry(0, 0.75, 0, new Vector3f(1f, 1.5f, 0.5f)),
-            "leftarm", new PartGeometry(0.6, 0.75, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
-            "rightarm", new PartGeometry(-0.6, 0.75, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
-            "leftleg", new PartGeometry(0.25, -0.25, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
-            "rightleg", new PartGeometry(-0.25, -0.25, 0, new Vector3f(0.5f, 1.5f, 0.5f))
+            "head", new PartGeometry(0, 1.255, 0, new Vector3f(1f, 1f, 1f)),
+            "body", new PartGeometry(0, 0.5, 0, new Vector3f(1f, 1.5f, 0.5f)),
+            "leftarm", new PartGeometry(0.4, 0.5, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
+            "rightarm", new PartGeometry(-0.4, 0.5, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
+            "leftleg", new PartGeometry(0.145, -0.25, 0, new Vector3f(0.5f, 1.5f, 0.5f)),
+            "rightleg", new PartGeometry(-0.145, -0.25, 0, new Vector3f(0.5f, 1.5f, 0.5f))
     );
 
     // Pequenio corrimiento hacia adelante por capa para evitar z-fighting entre

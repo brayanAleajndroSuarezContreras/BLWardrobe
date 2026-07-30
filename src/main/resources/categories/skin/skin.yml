@@ -3,12 +3,52 @@ slot: 0
 icon: PLAYER_HEAD
 items:
   skin_default:
-    name: '&fDefault Skin'
+    name: '&fSkin Legend'
     permission: blwardrobe.skin.skin.default
     default: true
     model: skin_default
-  skin_legend_boda:
-    name: '&fDefault Skin'
+  skin_alex:
+    name: '&fSkin Alex'
     permission: blwardrobe.skin.skin.default
     default: true
-    model: skin_legend_boda
+    model: skin_alex
+  skin_ari:
+    name: '&fSkin Ari'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_ari
+  skin_efe:
+    name: '&fSkin Efe'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_efe
+  skin_kai:
+    name: '&fSkin Kai'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_kai
+  skin_makena:
+    name: '&fSkin Makena'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_makena
+  skin_noor:
+    name: '&fSkin Noor'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_noor
+  skin_steve:
+    name: '&fSkin Steve'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_steve
+  skin_sunny:
+    name: '&fSkin Sunny'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_sunny
+  skin_zuri:
+    name: '&fSkin Zuri'
+    permission: blwardrobe.skin.skin.default
+    default: true
+    model: skin_zuri
